@@ -13,6 +13,8 @@
 		07B1ECFB268106E300B1C957 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 07B1ECF9268106E300B1C957 /* Main.storyboard */; };
 		07B1ECFD268106E600B1C957 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07B1ECFC268106E600B1C957 /* Assets.xcassets */; };
 		07B1ED00268106E600B1C957 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 07B1ECFE268106E600B1C957 /* LaunchScreen.storyboard */; };
+		386D73202681092B004DE059 /* data.json in Resources */ = {isa = PBXBuildFile; fileRef = 386D731E2681092A004DE059 /* data.json */; };
+		386D73212681092B004DE059 /* MusicService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 386D731F2681092B004DE059 /* MusicService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		07B1ECFC268106E600B1C957 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		07B1ECFF268106E600B1C957 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		07B1ED01268106E600B1C957 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		386D731E2681092A004DE059 /* data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = data.json; sourceTree = "<group>"; };
+		386D731F2681092B004DE059 /* MusicService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +60,8 @@
 		07B1ECF2268106E300B1C957 /* SpotibyMusic */ = {
 			isa = PBXGroup;
 			children = (
+				386D731E2681092A004DE059 /* data.json */,
+				386D731F2681092B004DE059 /* MusicService.swift */,
 				07B1ECF3268106E300B1C957 /* AppDelegate.swift */,
 				07B1ECF5268106E300B1C957 /* SceneDelegate.swift */,
 				07B1ECF7268106E300B1C957 /* ViewController.swift */,
@@ -127,6 +133,7 @@
 				07B1ED00268106E600B1C957 /* LaunchScreen.storyboard in Resources */,
 				07B1ECFD268106E600B1C957 /* Assets.xcassets in Resources */,
 				07B1ECFB268106E300B1C957 /* Main.storyboard in Resources */,
+				386D73202681092B004DE059 /* data.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -140,6 +147,7 @@
 				07B1ECF8268106E300B1C957 /* ViewController.swift in Sources */,
 				07B1ECF4268106E300B1C957 /* AppDelegate.swift in Sources */,
 				07B1ECF6268106E300B1C957 /* SceneDelegate.swift in Sources */,
+				386D73212681092B004DE059 /* MusicService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -292,7 +300,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = Julia.SpotibyMusic;
+				PRODUCT_BUNDLE_IDENTIFIER = Luiz.SpotibyMusic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -310,7 +318,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = Julia.SpotibyMusic;
+				PRODUCT_BUNDLE_IDENTIFIER = Luiz.SpotibyMusic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
