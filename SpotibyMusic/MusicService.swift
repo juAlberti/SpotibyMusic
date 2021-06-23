@@ -167,3 +167,4 @@ final class MusicService {
         queue.nextSuggested.removeAll { $0 == music }
     }
 }
+
