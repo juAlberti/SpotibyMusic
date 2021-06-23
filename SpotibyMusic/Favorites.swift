@@ -9,6 +9,7 @@ import UIKit
 
 class Favorites: UIViewController, UITableViewDataSource, UITableViewDelegate {
     //identifier: MusicWithImage
+    
     @IBOutlet weak var tableView: UITableView!
     private var favMusics: [Music] = (try? MusicService())?.favoriteMusics ?? []
     
@@ -29,11 +30,15 @@ class Favorites: UIViewController, UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MusicWithImage", for: indexPath)
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "favorites-cell", for: indexPath) as! FavoritesCell
+        
+        
         let fav = favMusics[indexPath.section]
         
-        cell.textLabel?.text = fav.title
-        cell.detailTextLabel?.text = fav.artist
+        cell.music.text = fav.title
+        cell.artist.text = fav.artist
+        cell.coverImage.image = UIImage(named: fav.id)
         return cell
     }
     

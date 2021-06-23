@@ -9,6 +9,7 @@ import UIKit
 
 class AlbumDetailsCell: UITableViewCell {
     
+    
     @IBOutlet weak var coverImage: UIImageView!
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var subtitle: UILabel!

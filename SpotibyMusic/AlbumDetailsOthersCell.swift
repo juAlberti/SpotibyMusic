@@ -7,15 +7,24 @@
 
 import UIKit
 
+protocol FavoriteDelegate: AnyObject{
+    func didTapFavoriteButton(button: UIButton, fromCell cell: UITableViewCell)
+}
+
 class AlbumDetailsOthersCell: UITableViewCell {
+
+    @IBAction func buttonTap(_ sender: UIButton) {
+        favoriteDelegate?.didTapFavoriteButton(button: sender, fromCell: self)
+    }
     @IBOutlet weak var title: UILabel!
-    
+
     @IBOutlet weak var subtitle: UILabel!
     
     @IBOutlet weak var coverImage: UIImageView!
+        
+    @IBOutlet weak var heart: UIButton!
     
-    @IBOutlet weak var heart: UIImageView!
-    
+    weak var favoriteDelegate: FavoriteDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()

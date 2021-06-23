@@ -12,7 +12,6 @@ import UIKit
 
 struct Music: Hashable, Decodable {
     let id: String
-    
     let title: String
     let artist: String
     let length: TimeInterval

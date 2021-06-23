@@ -23,6 +23,7 @@
 		386D73212681092B004DE059 /* MusicService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 386D731F2681092B004DE059 /* MusicService.swift */; };
 		3896C57D2683ABAD00504A58 /* AlbumDetailsOthersCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3896C57C2683ABAD00504A58 /* AlbumDetailsOthersCell.swift */; };
 		3896C57F2683B6E700504A58 /* LibraryCellsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3896C57E2683B6E700504A58 /* LibraryCellsTableViewCell.swift */; };
+		3896C5812683C44800504A58 /* FavoritesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3896C5802683C44800504A58 /* FavoritesCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		386D731F2681092B004DE059 /* MusicService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicService.swift; sourceTree = "<group>"; };
 		3896C57C2683ABAD00504A58 /* AlbumDetailsOthersCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumDetailsOthersCell.swift; sourceTree = "<group>"; };
 		3896C57E2683B6E700504A58 /* LibraryCellsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryCellsTableViewCell.swift; sourceTree = "<group>"; };
+		3896C5802683C44800504A58 /* FavoritesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +84,7 @@
 				07B1ECF5268106E300B1C957 /* SceneDelegate.swift */,
 				07B1ECF7268106E300B1C957 /* ViewController.swift */,
 				07B1ECF9268106E300B1C957 /* Main.storyboard */,
+				3896C5802683C44800504A58 /* FavoritesCell.swift */,
 				3896C57E2683B6E700504A58 /* LibraryCellsTableViewCell.swift */,
 				384122D4268240BA00CBE272 /* AlbumDetailsCell.swift */,
 				3896C57C2683ABAD00504A58 /* AlbumDetailsOthersCell.swift */,
@@ -174,6 +177,7 @@
 				07B1ECF4268106E300B1C957 /* AppDelegate.swift in Sources */,
 				07B1ED08268110A000B1C957 /* Library.swift in Sources */,
 				3896C57F2683B6E700504A58 /* LibraryCellsTableViewCell.swift in Sources */,
+				3896C5812683C44800504A58 /* FavoritesCell.swift in Sources */,
 				07B1ED0C268110F300B1C957 /* AlbumPlaylistDetails.swift in Sources */,
 				07B1ED0A268110CC00B1C957 /* Favorites.swift in Sources */,
 				384122D5268240BA00CBE272 /* AlbumDetailsCell.swift in Sources */,

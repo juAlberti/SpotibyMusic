@@ -7,19 +7,34 @@
 
 import UIKit
 
-class AlbumPlaylistDetails: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class AlbumPlaylistDetails: UIViewController, UITableViewDataSource, UITableViewDelegate, FavoriteDelegate {
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return albumDetails?.musics.count ?? 1
-        
+    
+    func didTapFavoriteButton(button: UIButton, fromCell cell: UITableViewCell) {
+        guard let indexPath = tableView.indexPath(for: cell),
+              let music = albumDetails?.musics[indexPath.row],
+              let musicService = musicService,
+              let albumDetails = albumDetails
+        else {return}
+        let isFavorite = musicService.favoriteMusics.contains(music)
+        musicService.toggleFavorite(music: music, isFavorite: !isFavorite)
+        self.albumDetails = musicService.getCollection(id: albumDetails.id)
+        tableView.reloadData()
     }
     
     
+    private var musicService: MusicService? = try? MusicService()
+    
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return albumDetails?.musics.count ?? 1
+    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let album = albumDetails?.musics[indexPath.row]
         
-        
+        // first cell
         if (indexPath.row == 0){
             let firstCell = tableView.dequeueReusableCell(withIdentifier: "first-cell", for: indexPath) as! AlbumDetailsCell
             
@@ -35,12 +50,9 @@ class AlbumPlaylistDetails: UIViewController, UITableViewDataSource, UITableView
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "MMM d, yyyy"
                 
-                var dateFromStr = dateFormatter.string(from: albumdetails.referenceDate)
+                let dateFromStr = dateFormatter.string(from: albumdetails.referenceDate)
                 firstCell.releasedAt.text = "Released \(dateFromStr)"
             }
-            
-            
-            
             
             return firstCell
         }
@@ -48,6 +60,9 @@ class AlbumPlaylistDetails: UIViewController, UITableViewDataSource, UITableView
         let cell = tableView.dequeueReusableCell(withIdentifier: "others-cell2", for: indexPath) as! AlbumDetailsOthersCell
         
         if let ismusic = album, let albumdetails = albumDetails {
+            
+            cell.favoriteDelegate = self
+            
             // configurar a celulas gerais
             cell.coverImage.image = UIImage(named: ismusic.id)
             
@@ -63,8 +78,8 @@ class AlbumPlaylistDetails: UIViewController, UITableViewDataSource, UITableView
             }
         }
         return cell
-
     }
+    
     
     @IBOutlet weak var tableView: UITableView!
     
