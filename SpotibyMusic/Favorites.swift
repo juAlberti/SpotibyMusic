@@ -7,23 +7,44 @@
 
 import UIKit
 
-class Favorites: UIViewController {
-
+class Favorites: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    //identifier: MusicWithImage
+    @IBOutlet weak var tableView: UITableView!
+    private var favMusics: [Music] = (try? MusicService())?.favoriteMusics ?? []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        tableView.dataSource = self
+        tableView.delegate = self
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return favMusics.count
     }
-    */
-
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        let fav = favMusics[section]
+        return fav.artist.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MusicWithImage", for: indexPath)
+        let fav = favMusics[indexPath.section]
+        
+        cell.textLabel?.text = fav.title
+        cell.detailTextLabel?.text = fav.artist
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return favMusics[section].title
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("selected \(indexPath)")
+        
+        performSegue(withIdentifier: "MusicWithImage", sender: indexPath)
+    }
+    
 }
