@@ -7,17 +7,23 @@
 
 import UIKit
 
-class FavoritesCell: UITableViewCell {
 
+class FavoritesCell: UITableViewCell {
+    
     @IBOutlet weak var coverImage: UIImageView!
     @IBOutlet weak var music: UILabel!
     
     @IBOutlet weak var artist: UILabel!
     @IBOutlet weak var isFavorite: UIButton!
     
+    
+    @IBAction func buttonTap(_ sender: UIButton) {
+        favoriteDelegate?.didTapFavoriteButton(button: sender, fromCell: self)
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-
+    weak var favoriteDelegate: FavoriteDelegate?
 }
