@@ -9,10 +9,13 @@ import UIKit
 
 class AlbumPlaylistDetails: UIViewController, UITableViewDataSource, UITableViewDelegate, FavoriteDelegate {
     
+    @IBAction func infoAction(_ sender: UIBarButtonItem) {
+        performSegue(withIdentifier: "aboutAlbum", sender: albumDetails)
+    }
     
     func didTapFavoriteButton(button: UIButton, fromCell cell: UITableViewCell) {
         guard let indexPath = tableView.indexPath(for: cell),
-              let music = albumDetails?.musics[indexPath.row],
+              let music = albumDetails?.musics[indexPath.row-1],
               let musicService = musicService,
               let albumDetails = albumDetails
         else {return}
@@ -27,22 +30,20 @@ class AlbumPlaylistDetails: UIViewController, UITableViewDataSource, UITableView
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return albumDetails?.musics.count ?? 1
+        return (albumDetails?.musics.count ?? 1) + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let album = albumDetails?.musics[indexPath.row]
         
         // first cell
         if (indexPath.row == 0){
             let firstCell = tableView.dequeueReusableCell(withIdentifier: "first-cell", for: indexPath) as! AlbumDetailsCell
             
-            if let ismusic = album, let albumdetails = albumDetails {
-                // configurar primeira celular
-                firstCell.coverImage.image = UIImage(named: ismusic.id)
-                firstCell.title.text = ismusic.title
-                firstCell.subtitle.text = "\(albumdetails.type) by \(ismusic.artist)"
+            if let albumdetails = albumDetails {
+                           // configurar primeira celular
+                firstCell.coverImage.image = UIImage(named: albumdetails.id)
+                firstCell.title.text = albumdetails.title
+                firstCell.subtitle.text = "\(albumdetails.type) by \(albumdetails.mainPerson)"
                 firstCell.numberOfSongs.text = "\(albumdetails.musics.count) songs"
                 
                 
@@ -57,6 +58,7 @@ class AlbumPlaylistDetails: UIViewController, UITableViewDataSource, UITableView
             return firstCell
         }
         
+        let album = albumDetails?.musics[indexPath.row-1]
         let cell = tableView.dequeueReusableCell(withIdentifier: "others-cell2", for: indexPath) as! AlbumDetailsOthersCell
         
         if let ismusic = album, let albumdetails = albumDetails {
@@ -65,22 +67,25 @@ class AlbumPlaylistDetails: UIViewController, UITableViewDataSource, UITableView
             
             // configurar a celulas gerais
             cell.coverImage.image = UIImage(named: ismusic.id)
+    
+            cell.title.text = ismusic.title
+            cell.subtitle.text = ismusic.artist
             
-            if (albumdetails.type == .album){
-                cell.title.text = ismusic.title
-                cell.subtitle.text = ismusic.artist
-                
-            }
-            
-            else if (albumdetails.type == .playlist){
-                cell.title.text = ismusic.title
-                cell.subtitle.text = ismusic.artist
-            }
+            let isFavorite = musicService?.favoriteMusics.contains(ismusic) ?? false
+            let imageName = isFavorite ? "heart.fill" : "heart"
+            let imageButton = UIImage(systemName: imageName)
+            cell.heart.tintColor = isFavorite ? .red : .black
+            cell.heart.setImage(imageButton, for: .normal)
         }
         return cell
     }
     
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "aboutAlbum"{
+            let destination = segue.destination as? AlbumInfo
+            destination?.album = albumDetails //????
+        }
+    }
     @IBOutlet weak var tableView: UITableView!
     
     //private var musicService: MusicService? = try? MusicService()
