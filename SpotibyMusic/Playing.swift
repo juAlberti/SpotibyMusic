@@ -35,7 +35,6 @@ class Playing: UIViewController,FavoriteCellDelegate {
         }
     }
     
-    
     @IBAction func buttonTap(_ sender: UIButton) {
         if let songInfo = songInfo{
             let isFavorite = favMusics.contains(songInfo) ? true : false
@@ -43,7 +42,6 @@ class Playing: UIViewController,FavoriteCellDelegate {
             let imageButton = UIImage(systemName: imageName)
             buttonFavorite.setImage(imageButton, for: .normal)
             favoriteDelegate?.toggleFavorite(musics: songInfo)
-            
         }
     }
         
