@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol FavoriteCellDelegate: AnyObject {
+    func toggleFavorite(musics: Music)
+}
+
 
 class FavoritesCell: UITableViewCell {
     
@@ -18,12 +22,15 @@ class FavoritesCell: UITableViewCell {
     
     
     @IBAction func buttonTap(_ sender: UIButton) {
-        favoriteDelegate?.didTapFavoriteButton(button: sender, fromCell: self)
+        if let musics = musics{
+            favoriteDelegate?.toggleFavorite(musics: musics)
+        }
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-    weak var favoriteDelegate: FavoriteDelegate?
+    weak var favoriteDelegate: FavoriteCellDelegate?
+    var musics: Music?
 }

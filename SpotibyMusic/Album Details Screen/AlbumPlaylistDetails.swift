@@ -9,9 +9,16 @@ import UIKit
 
 class AlbumPlaylistDetails: UIViewController, UITableViewDataSource, UITableViewDelegate, FavoriteDelegate {
     
+    
+    var albumDetails: MusicCollection?
+    private var musicService: MusicService? = try? MusicService()
+
+    
     @IBAction func infoAction(_ sender: UIBarButtonItem) {
-        performSegue(withIdentifier: "aboutAlbum", sender: albumDetails)
+        performSegue(withIdentifier: "aboutAlbum", sender: nil)
     }
+    
+    
     
     func didTapFavoriteButton(button: UIButton, fromCell cell: UITableViewCell) {
         guard let indexPath = tableView.indexPath(for: cell),
@@ -26,7 +33,6 @@ class AlbumPlaylistDetails: UIViewController, UITableViewDataSource, UITableView
     }
     
     
-    private var musicService: MusicService? = try? MusicService()
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -61,8 +67,7 @@ class AlbumPlaylistDetails: UIViewController, UITableViewDataSource, UITableView
         let album = albumDetails?.musics[indexPath.row-1]
         let cell = tableView.dequeueReusableCell(withIdentifier: "others-cell2", for: indexPath) as! AlbumDetailsOthersCell
         
-        if let ismusic = album, let albumdetails = albumDetails {
-            
+        if let ismusic = album {
             cell.favoriteDelegate = self
             
             // configurar a celulas gerais
@@ -74,31 +79,51 @@ class AlbumPlaylistDetails: UIViewController, UITableViewDataSource, UITableView
             let isFavorite = musicService?.favoriteMusics.contains(ismusic) ?? false
             let imageName = isFavorite ? "heart.fill" : "heart"
             let imageButton = UIImage(systemName: imageName)
-            cell.heart.tintColor = isFavorite ? .red : .black
+            cell.heart.tintColor = isFavorite ? .red : .red
             cell.heart.setImage(imageButton, for: .normal)
         }
         return cell
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "aboutAlbum"{
-            let destination = segue.destination as? AlbumInfo
-            destination?.album = albumDetails //????
-        }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "playingSegue", sender: indexPath)
     }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "playingSegue", let indexPath = sender as? IndexPath {
+            let destination = segue.destination as? UINavigationController
+            
+            let playing = destination?.viewControllers.first as? Playing
+            playing?.songInfo = albumDetails?.musics[indexPath.row-1]
+        }
+        
+        if segue.identifier == "aboutAlbum"{
+            let destination = segue.destination as? UINavigationController
+            let albuminfo = destination?.viewControllers.first as? AlbumInfo
+            albuminfo?.album = albumDetails
+        }
+
+    }
+    
+//    override func viewWillAppear(_ animated: Bool) {
+//        self.albumDetails = musicService?.favoriteMusics as [Music]? ?? []
+//        tableView.reloadData()
+//    }
     @IBOutlet weak var tableView: UITableView!
     
-    //private var musicService: MusicService? = try? MusicService()
-    var albumDetails: MusicCollection?
-    
-    
-    
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
-        
-        //
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
+    }
+    
 }
